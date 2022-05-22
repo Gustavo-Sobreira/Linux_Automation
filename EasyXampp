@@ -1,0 +1,64 @@
+#!/bin/bash
+
+#Autor: Gustavo Sobreira
+#Data: 12/05/2022
+#Versão: 1.0
+#Name: EasyXampp
+#Descrição: Script de execução do Xampp, startando e parando o servidor. 
+
+#Startando o servidor
+sudo /opt/lampp/lampp start
+#Tempo de espera
+
+clear
+echo "----------------------------------------------------"
+echo "       -> Servidores iniciados com sucesso! <-      "
+echo "----------------------------------------------------"
+echo "10%
+███▒▒▒▒▒▒▒"
+sleep 1
+clear
+
+echo "----------------------------------------------------"
+echo "      -> Servidores iniciados com sucesso!  <-      "
+echo "        -> Aguarde... O Brave será aberto! <-       "
+echo "----------------------------------------------------"
+echo "30%
+█████▒▒▒▒▒"
+sleep 1
+clear
+
+echo "----------------------------------------------------"
+echo "      -> Servidores iniciados com sucesso!  <-      "
+echo "        -> Aguarde... O Brave será aberto! <-       "
+echo "          -> Passando link para o Brave.. <-        "
+echo "----------------------------------------------------"
+echo "50%
+███████▒▒▒"
+sleep 1
+clear
+echo "----------------------------------------------------"
+echo "      -> Servidores iniciados com sucesso!  <-      "
+echo "        -> Aguarde... O Brave será aberto! <-       "
+echo "          -> Passando link para o Brave.. <-        "
+echo "            -> Seu nanco SQL está aberto <-	  "
+echo "----------------------------------------------------"
+echo "100%
+███████████"    
+sleep 1
+
+brave-browser http://localhost/phpmyadmin/
+
+if [kill $(pgrep brave-browser)];then
+
+    sudo /opt/lampp/lampp reload
+else
+    sudo /opt/lampp/lampp stop
+fi
+
+clear
+
+echo "----------------------------------------------------"
+echo "       -> SERVIDORES FECHADOS COM SUCESSO <-                    "
+echo "----------------------------------------------------"
+sleep 1

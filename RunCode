@@ -1,0 +1,48 @@
+#!/bin/bash
+#Script de execução de c#
+
+#Autor: Gustavo Sobreira
+#Data: 22/05/2022
+#Versão: 1.0
+#Name: RodaC#
+#Descrição: Script de execução de C# em ambiente linux para melhor rendimento.
+
+#Altere o caminho para o diretório desjado
+echo "          ==========================================================="
+echo "                            DIRETÓRIOS DISPONÍVEIS"
+echo "          ==========================================================="
+echo ""
+echo ""
+
+cd /home/sobreira/Área\ de\ Trabalho/DELAGE/C_Sharp/
+ls -Cc 
+echo ""
+echo ""
+
+#Todos meus diretórios desta pasta recebem um número e um nome após
+# 2_Criar_Calculadora
+#Fiz assim para que não precisasse digitar todo o caminho do arquivo
+read -p " 0--> DIGA O NÚMERO DO DIRETÓRIO ESCOLHIDO: " arquivo
+
+#Localização do arquivo
+cd /home/sobreira/Área\ de\ Trabalho/DELAGE/C_Sharp/$arquivo*
+comando =$(code *.cs)
+$comando
+
+#Comando para executar arquivos .cs -> [C#]
+clear
+echo "          ==========================================================="
+echo "                          EXECUTANDO DIRETÓRIO [ $arquivo ]"
+echo "          ==========================================================="
+echo ""
+
+dotnet run
+
+#O programa deve ser executado sempre que possível:
+while true; do
+    read -p "DESEJA ENCERRAR O PROGRAMA? [S/s]" yn
+    case $yn in
+        [Ss]* ) exit;;
+        * ) dotnet run;;
+    esac
+done
