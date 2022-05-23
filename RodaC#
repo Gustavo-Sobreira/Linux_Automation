@@ -1,0 +1,96 @@
+#!/bin/bash
+#Script de execução de c#
+
+#Autor: Gustavo Sobreira
+#Data: 22/05/2022
+#Versão: 1.0.1
+#Name: RodaC#
+#Descrição: Script de execução de C# em ambiente linux para melhor rendimento.
+
+
+echo "          ==========================================================="
+echo "                            DIRETÓRIOS DISPONÍVEIS"
+echo "          ==========================================================="
+echo ""
+echo ""
+
+#Altere o caminho para o diretório desjado na sua máquina
+cd /home/sobreira/Área\ de\ Trabalho/DELAGE/C_Sharp/
+ls -Cc 
+echo ""
+echo ""
+
+#Todos meus diretórios desta pasta recebem um número e um nome após
+# 2_Criar_Calculadora
+
+#Fiz assim para que não precise digitar todo o caminho do arquivo
+read -p " --> DIGA O NÚMERO DO DIRETÓRIO ESCOLHIDO: " arquivo
+clear
+
+#Localização do arquivo
+cd /home/sobreira/Área\ de\ Trabalho/DELAGE/C_Sharp/$arquivo*
+echo ""
+ls -Cc
+echo ""
+while true;do
+    read -p " --> DESEJA EXECUTAR OU CODAR O ARQUIVO? [ E / C ]" resp
+    case $resp in
+        [Ee]* )
+            #Execução do arquivo
+            clear
+
+            echo "          ==========================================================="
+            echo "                                   EXECUTANDO   "
+            echo "          ==========================================================="
+            echo " "
+
+            mono *.exe
+
+            while true; do
+                read -p "DESEJA ENCERRAR O PROGRAMA? [S/s]" yn
+                case $yn in
+                    [Ss]* ) break;; 
+                    * ) clear
+                    echo "          ==========================================================="
+                    echo "                                   EXECUTANDO   "
+                    echo "          ==========================================================="
+                    echo " "
+                    mono *.exe;;
+                esac
+            done;;
+
+        [Cc]* )
+            #Codando arquivo
+            clear
+            code *.cs
+
+            echo "          ==========================================================="
+            echo "                                   RODANDO CÓDIGO   "
+            echo "          ==========================================================="
+            echo " "
+
+            dotnet run
+
+            #O programa deve ser executado sempre que possível:
+            while true; do
+                read -p "DESEJA ENCERRAR O PROGRAMA? [S/s]" yn
+                case $yn in
+                    [Ss]* ) break;; 
+                    * ) clear
+                    echo "          ==========================================================="
+                    echo "                                RODANDO CÓDIGO   "
+                    echo "          ==========================================================="
+                    echo " "
+                    dotnet run;;
+                esac
+            done
+
+            ls -Cc
+            read -p "DESEJA SEM COMPILAR O ARQUIVO [ S / N ]:" compilar
+            if [ $compilar = "N" ] || [ $compilar = "n" ];then
+                csc *.cs
+            fi
+            break;;
+    esac
+done
+
