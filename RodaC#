@@ -7,6 +7,7 @@
 #Name: RodaC#
 #Descrição: Script de execução de C# em ambiente linux para melhor rendimento.
 
+#Necessário Mono,.net Core e vscode via terminal
 
 echo "          ==========================================================="
 echo "                            DIRETÓRIOS DISPONÍVEIS"
@@ -15,7 +16,10 @@ echo ""
 echo ""
 
 #Altere o caminho para o diretório desjado na sua máquina
-cd /home/sobreira/Área\ de\ Trabalho/DELAGE/C_Sharp/
+CAMINHO=/home/sobreira/Documentos/Cursos/Alura/C#
+
+#Vai até o destino
+cd $CAMINHO
 ls -Cc 
 echo ""
 echo ""
@@ -24,73 +28,48 @@ echo ""
 # 2_Criar_Calculadora
 
 #Fiz assim para que não precise digitar todo o caminho do arquivo
-read -p " --> DIGA O NÚMERO DO DIRETÓRIO ESCOLHIDO: " arquivo
-clear
+read -p " --> DIGA O NÚMERO DO DIRETÓRIO ESCOLHIDO: " numero
 
 #Localização do arquivo
-cd /home/sobreira/Área\ de\ Trabalho/DELAGE/C_Sharp/$arquivo*
-echo ""
-ls -Cc
-echo ""
-while true;do
-    read -p " --> DESEJA EXECUTAR OU CODAR O ARQUIVO? [ E / C ]" resp
-    case $resp in
-        [Ee]* )
-            #Execução do arquivo
-            clear
+cd $numero*
 
+while true; do
+    clear
+    echo "          ==========================================================="
+    echo "                                CONTEÚDO DIRETÓRIO   "
+    echo "          ==========================================================="
+    echo " "
+    ls
+    echo " "
+
+    
+    read -p " --> DESEJA EXECUTAR / BUILDAR / COMPILAR O ARQUIVO? [ E / B / C ]" acao
+    case $acao in
+        [Ee]*)
+            clear
             echo "          ==========================================================="
             echo "                                   EXECUTANDO   "
             echo "          ==========================================================="
             echo " "
-
-            mono *.exe
-
-            while true; do
-                read -p "DESEJA ENCERRAR O PROGRAMA? [S/s]" yn
-                case $yn in
-                    [Ss]* ) break;; 
-                    * ) clear
-                    echo "          ==========================================================="
-                    echo "                                   EXECUTANDO   "
-                    echo "          ==========================================================="
-                    echo " "
-                    mono *.exe;;
-                esac
-            done;;
-
-        [Cc]* )
-            #Codando arquivo
+            mono *.exe;;
+        
+        [Bb]*)
             clear
             code *.cs
-
             echo "          ==========================================================="
             echo "                                   RODANDO CÓDIGO   "
             echo "          ==========================================================="
             echo " "
-
-            dotnet run
-
-            #O programa deve ser executado sempre que possível:
-            while true; do
-                read -p "DESEJA ENCERRAR O PROGRAMA? [S/s]" yn
-                case $yn in
-                    [Ss]* ) break;; 
-                    * ) clear
-                    echo "          ==========================================================="
-                    echo "                                RODANDO CÓDIGO   "
-                    echo "          ==========================================================="
-                    echo " "
-                    dotnet run;;
-                esac
-            done
-
-            ls -Cc
-            read -p "DESEJA SEM COMPILAR O ARQUIVO [ S / N ]:" compilar
-            if [ $compilar = "N" ] || [ $compilar = "n" ];then
-                csc *.cs
-            fi
-            break;;
+            dotnet build ; dotnet run;;
+        
+        [Cc]*)
+            csc *.cs;;
     esac
+    read -p " --> DESEJA FECHAR O PROGRAMA? [ S / N ]" sair
+    case $sair in
+        [Ss]*)
+            break;;
+        *)
+        clear;;
+    esac    
 done
-
